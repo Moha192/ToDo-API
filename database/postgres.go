@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 	"log"
-	"time"
+	"os"
 
 	_ "github.com/lib/pq"
 )
@@ -12,8 +12,7 @@ var DB *sql.DB
 
 func InitDB() {
 	var err error
-	DB, err = sql.Open("postgres", "user=postgres password=postgres dbname=postgres sslmode=disable host=db_todo port=5432")
-	time.Sleep(time.Second * 1)
+	DB, err = sql.Open("postgres", os.Getenv("DB_CONNECTION"))
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -15,20 +15,20 @@ var task models.Task
 func handleTask(w http.ResponseWriter, r *http.Request) {
 	switch {
 	case r.Method == http.MethodGet:
-		getTasks(w, r)
+		handleGetTasks(w, r)
 
 	case r.Method == http.MethodPost:
-		postTask(w, r)
+		handlePostTask(w, r)
 
 	case r.Method == http.MethodDelete:
-		deleteTask(w, r)
+		handleDeleteTask(w, r)
 
 	default:
 		w.WriteHeader(http.StatusMethodNotAllowed)
 	}
 }
 
-func getTasks(w http.ResponseWriter, r *http.Request) {
+func handleGetTasks(w http.ResponseWriter, r *http.Request) {
 	var err error
 	task.UserID, err = strconv.Atoi(r.URL.Query().Get("userID"))
 	if err != nil {
@@ -50,7 +50,7 @@ func getTasks(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
-func postTask(w http.ResponseWriter, r *http.Request) {
+func handlePostTask(w http.ResponseWriter, r *http.Request) {
 	if err := decoder(w, r, &task); err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)
@@ -123,7 +123,7 @@ func handlePatchStatus(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(task)
 }
 
-func deleteTask(w http.ResponseWriter, r *http.Request) {
+func handleDeleteTask(w http.ResponseWriter, r *http.Request) {
 	if err := decoder(w, r, &task); err != nil {
 		log.Println(err)
 		w.WriteHeader(http.StatusBadRequest)

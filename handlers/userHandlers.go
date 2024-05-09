@@ -12,7 +12,7 @@ import (
 
 var user models.User
 
-func handlesignUp(w http.ResponseWriter, r *http.Request) {
+func handleSignUp(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		return

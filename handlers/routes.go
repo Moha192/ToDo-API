@@ -8,7 +8,7 @@ import (
 
 func InitializeRoutes() {
 	//user
-	http.HandleFunc("/user/signUp", handlesignUp)
+	http.HandleFunc("/user/signUp", handleSignUp)
 	http.HandleFunc("/user/logIn", handleLogIn)
 	http.HandleFunc("/user", handleDeleteUser)
 
